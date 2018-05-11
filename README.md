@@ -259,6 +259,7 @@ function animals(...types){
 animals('cat', 'dog', 'fish') //["cat", "dog", "fish"]
 ```
 而如果不用ES6的话，我们则得使用ES5的arguments。
+
 ###Spread operator(展开运算符)
 >展开运算符（spread）是三个点（…）,可以将数组转为用逗号分隔的参数序列。如同rest参数的逆运算。
 语法：
