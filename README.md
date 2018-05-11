@@ -8,7 +8,7 @@ title: es6
 
 # 最常用的ES6特性
 ```
-let, const, class, extends, super, arrow functions, template string, destructuring, default, rest arguments
+let, const, class, extends, super, arrow functions, template string, destructuring, default, rest arguments, Spread operator
 ```
 ###let, const
 >这两个的用途与var类似，都是用来声明变量的，但在实际运用中他俩都有各自的特殊用途。
@@ -259,3 +259,56 @@ function animals(...types){
 animals('cat', 'dog', 'fish') //["cat", "dog", "fish"]
 ```
 而如果不用ES6的话，我们则得使用ES5的arguments。
+###Spread operator(展开运算符)
+>展开运算符（spread）是三个点（…）,可以将数组转为用逗号分隔的参数序列。如同rest参数的逆运算。
+语法：
+```
+console.log(...[1, 2, 3])
+// 1 2 3
+
+console.log(1, ...[2, 3, 4], 5);
+// 1 2 3 4 5
+
+[...document.querySelectorAll('div')]
+// [<div>, <div>, <div>...]
+```
+用法：
+1.替换apply方法----展开运算符可以展开数组，因此可以替换apply方法，将数组转为函数的参数。
+```
+function func(x, y, z) { }
+var args = [0, 1, 2];
+
+// ES5写法
+func.apply(null, args);
+
+// ES6写法
+func(...args);
+```
+2.更强大的数组字面量操作----如果由一个已知数组创建一个新数组，数组字面量语法则不足以达到目的，必须结合push, splice, concat等方法。而展开运算符可以轻松实现这个目标。
+```
+var parts = ['shoulders', 'knees'];
+var lyrics = ['head', ...parts, 'and', 'toes'];
+// ["head", "shoulders", "knees", "and", "toes"]
+```
+3.替换push方法----es5__es6
+```
+var arr1 = [0, 1, 2], arr2 = [3, 4, 5];
+// Append all items in arr2 onto arr1
+Array.prototype.push.apply(arr1, arr2);
+
+
+var arr1 = [0, 1, 2], arr2 = [3, 4, 5];
+arr1.push(...arr2);
+arr1 // [0, 1, 2, 3, 4, 5]
+```
+4.只用于可迭代的变量
+```
+var obj = {key1: 'value1'};
+var args = [...obj]; // 报错
+
+function func(x) {
+    console.log(x);
+}
+func(...obj); // 报错
+```
+
